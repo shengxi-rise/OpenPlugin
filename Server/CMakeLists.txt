@@ -30,13 +30,14 @@ set(PROJECT_SOURCES
         widget.h
 
         widget.ui
+        resources/ico.o
 
 )
 
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
-    qt_add_executable(openplugin_server
+    qt_add_executable(openplugin_server resources/ico.o
 
             MANUAL_FINALIZATION
 
@@ -68,7 +69,7 @@ else ()
 
     else ()
 
-        add_executable(openplugin_server
+        add_executable(openplugin_server resources/ico.o
 
                 ${PROJECT_SOURCES}
 
@@ -79,7 +80,7 @@ else ()
 endif ()
 
 
-target_link_libraries(openplugin_server PRIVATE Qt${QT_VERSION_MAJOR}::Widgets  Qt6::WebSockets)
+target_link_libraries(openplugin_server PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt6::WebSockets)
 
 
 set_target_properties(openplugin_server PROPERTIES

@@ -33,8 +33,8 @@ Widget::Widget(QWidget *parent)
     int i = 0;
             foreach(QString key, keys) {
             QString value = info->value(key).toString();
+
             /// 渲染表格，
-            /// （这里犯了一个错，直接把item->setText(),这样子是不行的，因为本来不存在item）
             // 创建 QTableWidgetItem 对象
             QTableWidgetItem *keyItem = new QTableWidgetItem;
             QTableWidgetItem *valueItem = new QTableWidgetItem;
@@ -78,26 +78,6 @@ Widget::Widget(QWidget *parent)
     });
 
 
-    /// 鼠标右键菜单
-    // 创建事件
-    add = new QAction(("Add"), this);
-    del = new QAction(("Del"), this);
-    open = new QAction(("Open"), this);
-    // 添加进菜单
-    mouseMenu->addAction(add);
-    mouseMenu->addAction(del);
-    mouseMenu->addAction(open);
-
-
-    /// 打开软件测试菜单
-    connect(open, &QAction::triggered, this, [&] {
-        // 打开软件
-        QProcess process;
-        QString path = ui->AppTable->item(0, 2)->text();
-        process.start(path);
-        process.waitForFinished();
-
-    });
 
 }
 
@@ -186,9 +166,28 @@ void Widget::openApp(QString order) {
 
 }
 
+/// 鼠标右键菜单
+[[maybe_unused]] void Widget::menuConfig() {
 
-void Widget::menuConfig() {
+    // 创建事件
+    add = new QAction(("Add"), this);
+    del = new QAction(("Del"), this);
+    open = new QAction(("Open"), this);
+    // 添加进菜单
+    mouseMenu->addAction(add);
+    mouseMenu->addAction(del);
+    mouseMenu->addAction(open);
 
+
+    /// 打开软件测试菜单
+    connect(open, &QAction::triggered, this, [&] {
+        // 打开软件
+        QProcess process;
+        QString path = ui->AppTable->item(0, 2)->text();
+        process.start(path);
+        process.waitForFinished();
+
+    });
 }
 
 

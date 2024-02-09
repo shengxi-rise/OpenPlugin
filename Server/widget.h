@@ -41,7 +41,8 @@ private:
     QAction *open;
     QAction *add;
     QAction *del;
-    void menuConfig();
+
+    [[maybe_unused]] void menuConfig();
 
     /// 托盘右键菜单
     QMenu *trayMenu = new QMenu;
